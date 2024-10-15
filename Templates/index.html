@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists</title>
+    <link rel="stylesheet" href="/assets/styles.css"> 
+</head>
+<body>
+    <div class="tit"> 
+          <h1>List of Artists</h1>
+    </div>
+    <form action="/artist" method="POST">
+    <div class="artists-container">
+        {{range .}}
+        <div class="artist-card">
+            <button  name="artistName" value="{{.Name}}">
+               <img src="{{.Image}}" alt="{{.Name}}"> 
+               <h2 name="artistName" value="{{.Name}}">{{.Name}}</h2>
+            </button>
+    </div>
+    </form>
+        {{end}}
+    </div> 
+</body>
+</html>
