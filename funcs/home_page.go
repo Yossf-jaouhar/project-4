@@ -5,9 +5,21 @@ import (
 	"net/http"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	artists, err := FetchArtists()
 
+
+func Home(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.Error(w, "404 page not found", http.StatusNotFound)
+		return
+	}
+
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	
+	artists, err := FetchArtists("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
 		http.Error(w, "Failedllllll", http.StatusInternalServerError)
 		return
