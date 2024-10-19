@@ -4,20 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Name}}</title>
-    <link rel="stylesheet" href="/assets/artists.css"> 
+   <link rel="stylesheet" href="/assets/artists.css">
 </head>
 <body>
-    <h1>{{.Name}}</h1>
-    <div  class="artists-container">
+    <div class="DIC">
+        <h1 class="NameofTheArtist" >{{.Name}}</h1>
+        <a  class="ok" href="../">GO BACK</a>
+    </div>
+
+    
+
+    <div  class="ArtistsContainer">
         <img src="{{.Image}}" alt="{{.Name}}">
-        <h2>Members</h2>
-        <ul>
-            {{range .Members}}
-            <li>{{.}}</li> <!-- Display each member -->
-            {{else}}
-            <li>No members found.</li>
-            {{end}}
-        </ul>
+    </div>
+
+    <div class="ArtistData">
+            <div class="Album">
+                <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
+            </div>   
+            
+            <div class="Memb">
+                <h2>Members</h2>
+                <ul>
+                    {{range .Members}}
+                    <li>{{.}}</li>
+                    {{else}}
+                    <li>No members</li>
+                    {{end}}
+                </ul>
+            </div>
+
+
+            <div class="Concert">
+                <h2>ConcertDates</h2>
+                <ul>
+                    {{range .ConcertDatesDATA.Data}}
+                  <li>{{.}}</li>
+                  {{else}}
+                      <li>No ConcertDates</li>
+                  {{end}}
+                    </ul>
+            </div>
+            <div class="Locat">
+                <h2>Locations</h2>
+                <ul>
+                    {{range .LocationsDATA.Data}}
+                   <li>{{.}}</li>
+                   {{else}}
+                      <li>No Locations</li>
+                   {{end}}
+                    </ul>
+            </div>
+        
+            <div class="Relat">
+                <h2>Relations</h2>
+                <ul>
+                    {{range $key, $value := .RelationData.Data}}
+                    <li>
+                            <strong>{{ $key }}</strong>
+                            <ul>
+                                {{range $value}}
+                                <li>{{.}}</li>
+                                {{end}}
+                            </ul>
+                    </li>
+                    {{end}}
+                </ul>
+            </div>
     </div>
 </body>
-</html>
+</ht

@@ -7,11 +7,6 @@ import (
 )
 
 func PageArtist(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-
 	id := r.PathValue("id")
 
 	IDD, err := strconv.Atoi(id)
@@ -25,17 +20,46 @@ func PageArtist(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	DATA, err := FetchArtistsData("https://groupietrackers.herokuapp.com/api/artists")
+	apiURL := "https://groupietrackers.herokuapp.com/api/artists/" + id
 
-	Tmpl, err := template.ParseFiles("info.html")
-	if err != nil {
+	artistData, er := fetchArtist(apiURL)
+	if er != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "templates/500.html")
 		return
 	}
 
-	err = Tmpl.Execute(w, DATA)
+	artistData, err = fetchRelations(artistData)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "templates/500.html")
+		return
+	}
+	artistData, errr := fetchLocation(artistData)
+	if errr != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "templates/500.html")
+		return
+	}
+	artistData, errrr := fetchDates(artistData)
+	if errrr != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "templates/500.html")
+		return
+	}
+
+
+	tmpl, err := template.ParseFiles("Templates/info.html")
+	if err != nil {
+		http.Error(w, "Template not found", http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(w,artistData)
+
+	
+	if errr != nil {
+		http.Error(w, "Err in Execute", http.StatusInternalServerError)
 		return
 	}
 }

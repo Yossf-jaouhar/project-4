@@ -13,7 +13,7 @@ func main() {
 	
 
 	http.HandleFunc("/", funcs.Home)
-	http.HandleFunc("/artist", funcs.PageArtist)
+	http.HandleFunc("/Artist/{id}", funcs.PageArtist)
 
 	fmt.Println("Server is running on http://localhost:8080")
 	http.ListenAndServe(":8080", nil)

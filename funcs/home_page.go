@@ -19,7 +19,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 
 	
-	artists, err := FetchArtists("https://groupietrackers.herokuapp.com/api/artists")
+	apiArtist := "https://groupietrackers.herokuapp.com/api/artists"
+
+	artists, err := fetchArtists(apiArtist)
 	if err != nil {
 		http.Error(w, "Failedllllll", http.StatusInternalServerError)
 		return
@@ -31,8 +33,10 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = tmpl.Execute(w, artists)
-	if err != nil {
-		http.Error(w, "Error rendering template", http.StatusInternalServerError)
+	errr := tmpl.Execute(w, artists)
+	if errr != nil {
+		http.Error(w, "Err in Execute", http.StatusInternalServerError)
+		return
 	}
+	
 }

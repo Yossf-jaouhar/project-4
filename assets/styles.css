@@ -1,91 +1,85 @@
-/* Artists container grid layout */
-.artists-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
-    gap: 20px; /* Space between the cards */
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 body{
-    background-color: #30444b;
+    background-color: #315b61;
+    font-family: "Arial", "Helvetica", sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
 }
 
-
-h1 {
-    font-family: 'Poppins', sans-serif; /* Use a modern and elegant font */
-    font-size: 3em; /* Large text size for prominence */
-    background: linear-gradient(90deg, #0f1458, #15557a); /* Gradient background */
-   
-    text-align: center; /* Center the heading */
-    margin-top: 30px; /* Space above */
-    margin-bottom: 30px; /* Space below */
-    margin-left: 10%;
-    margin-right: 10%;
-    letter-spacing: 4px; /* Increase spacing between letters */
-    text-transform: uppercase; /* Make the text uppercase */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
-    font-weight: 700; /* Make the text bold */
-    transition: all 0.3s ease; /* Smooth transition on hover */
+.tit {
+    color: #F0F8FF;
+    background: linear-gradient(90deg, #0A2351, #4CA1AF); 
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    margin-top: 3vw; 
+    margin-bottom: 3vw;
+    margin-left: 20%;
+    margin-right: 20%;
+    flex-wrap: wrap;
+    font-weight: 500;
 }
 
-h1:hover {
-    letter-spacing: 6px; /* Slightly increase letter spacing on hover */
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+.artists-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
 }
 
-
-h2 {
-    font-family: 'Roboto', sans-serif; /* Use a clean, modern font */
-    font-size: 1.8em; /* Adjust the size for a subheading */
-    color: #555; /* Soft dark gray for the text color */
-    text-align: center; /* Center the text */
-    margin-top: 20px; /* Add space above */
-    margin-bottom: 15px; /* Add space below */
-    letter-spacing: 2px; /* Add spacing between letters */
-    text-transform: uppercase; /* Make the text uppercase */
-    font-weight: 500; /* Semi-bold for emphasis */
-    border-bottom: 2px solid #1c0141; /* Add a subtle bottom border for style */
-    display: inline-block; /* Make the text inline so the border is only as wide as the text */
-    padding-bottom: 5px; /* Add space between the text and the border */
-    transition: color 0.3s ease, letter-spacing 0.3s ease; /* Smooth transitions */
-}
-
-h2:hover {
-    color: #0084ff; /* Change text color on hover */
-    letter-spacing: 4px; /* Increase letter spacing on hover */
+.artist-card{
+    background-color: #002a5569; 
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    width: 250px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    
 }
 
 .artist-card:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: translateY(-10px);
 }
 
-/* Button inside each card */
-.artist-card button {
-    border: none;
-    background: none;
-    width: 100%;
-    cursor: pointer;
-    padding: 0;
+.NameOfArtist{
+    opacity: 0;
 }
 
-/* Image styling */
+.artist-card:hover .NameOfArtist {
+    color: #f7f7f7; 
+    opacity: 1;
+    font-weight: bold;
+    transition: color 0.3s ease, opacity 0.8s ease;
+}
+
 .artist-card img {
-    width: 100%;
-    height: 200px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
     object-fit: cover;
-    display: block;
+    margin: 0 auto;
+    transition: transform 0.5s ease;
+}
+
+.artist-card:hover img {
+    transform: scale(1.2);
 }
 
 
-/* Make the layout responsive */
-@media (max-width: 600px) {
-    .artist-card img {
-        height: 150px;
-    }
+.CreationDateoftheartist{
+    opacity: 0;
+}
 
-    .artist-card h2 {
-        font-size: 1.1em;
-    }
+.artist-card:hover .CreationDateoftheartist {
+    color: #ffffff; 
+    opacity: 1;
+    font-weight: bold;
+    transition: color 0.3s ease, opacity 0.8s ease;
+  
 }
