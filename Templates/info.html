@@ -11,6 +11,7 @@
 
     <h1 class="NameofTheArtist" >{{.Name}}</h1>
 
+
     
     <div class="if">
         <div  class="artists-container">
@@ -21,7 +22,14 @@
             <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
         </div>   
     </div>
-        
+     
+
+    <div>
+        <a  class="ok" href="../">GO BACK</a>
+    </div>
+
+
+    
     <div class="artistdata">        
            
             <div class="Members">
@@ -63,16 +71,17 @@
                       {{end}}
                 </ul>
             </div>
-            <div class="Locations">
-                <h2>Locations</h2>
-                <ul>
-                   {{range .LocationsDATA.Data}}
-                   <li>{{.}}</li>
-                      {{else}}
-                   <li>No Locations</li>
-                      {{end}}
-                </ul>
-            </div>
-    </div>
+               
+        <div class="Locations">
+            <h2>Locations</h2>
+            <ul>
+               {{range .LocationsDATA.Data}}
+               <li>{{.}}</li>
+                  {{else}}
+               <li>No Locations</li>
+                  {{end}}
+            </ul>
+        </div>
+    </div> 
 </body>
 </html>
