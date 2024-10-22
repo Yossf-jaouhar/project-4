@@ -31,11 +31,11 @@ body{
 
 .artist-card{
     background-color: #002a5569; 
-    padding: 20px;
+    padding: 30px;
     text-align: center;
     border-radius: 10px;
-    width: 250px;
-    height: 300px;
+    width: 230px;
+    height: 330px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,20 +47,11 @@ body{
     transform: translateY(-10px);
 }
 
-.NameOfArtist{
-    opacity: 0;
-}
 
-.artist-card:hover .NameOfArtist {
-    color: #f7f7f7; 
-    opacity: 1;
-    font-weight: bold;
-    transition: color 0.3s ease, opacity 0.8s ease;
-}
 
 .artist-card img {
-    width: 130px;
-    height: 130px;
+    width: 100px;
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
     margin: 0 auto;
@@ -68,7 +59,7 @@ body{
 }
 
 .artist-card:hover img {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 
@@ -82,4 +73,40 @@ body{
     font-weight: bold;
     transition: color 0.3s ease, opacity 0.8s ease;
   
+}
+
+.search-container {
+    margin: 20px;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 100%; 
+    max-width: 500px; 
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; 
+}
+
+
+@media (max-width: 600px) {
+    input[type="text"] {
+        width: 40%; 
+        padding: 8px; 
+    }
+
+  
+
+    .search-container {
+        margin: 10px;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    input[type="text"] {
+        max-width: 400px;
+    }
+
 }

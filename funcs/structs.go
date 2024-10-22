@@ -1,7 +1,7 @@
 package funcs
 
 type ArtistData struct {
-	ID              int      `json:"id"`
+	ID               int      `json:"id"`
 	Name             string   `json:"name"`
 	Image            string   `json:"image"`
 	Members          []string `json:"members"`
@@ -11,25 +11,21 @@ type ArtistData struct {
 	LocationsDATA    LocationsS
 	ConcertDates     string `json:"concertDates"`
 	ConcertDatesDATA ConcertDatesS
-	Relations        string `json:"relations"`
-	RelationData    RelationsS
+	Relations        string              `json:"relations"`
+	RelationData   RelationsS
+	FEATCHINGerror error
 }
 
-
-type Artists []ArtistData
-
+var Artists []ArtistData
 
 type LocationsS struct {
-	ID        int      `json:"id"`
-	Data []string      `json:"locations"`
+	Data []string `json:"locations"`
 }
 
 type ConcertDatesS struct {
-	ID        int      `json:"id"`
-	Data []string         `json:"dates"`
+	Data []string `json:"dates"`
 }
 
 type RelationsS struct {
-	ID        int      `json:"id"`
-	Data map[string][]string  `json:"datesLocations"`
+	Data map[string][]string `json:"datesLocations"`
 }

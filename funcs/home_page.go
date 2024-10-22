@@ -18,22 +18,15 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fetchArtists()
 	
-	apiArtist := "https://groupietrackers.herokuapp.com/api/artists"
-
-	artists, err := fetchArtists(apiArtist)
-	if err != nil {
-		http.Error(w, "Failedllllll", http.StatusInternalServerError)
-		return
-	}
-
 	tmpl, err := template.ParseFiles("Templates/index.html")
 	if err != nil {
 		http.Error(w, "Template not found", http.StatusInternalServerError)
 		return
 	}
 
-	errr := tmpl.Execute(w, artists)
+	errr := tmpl.Execute(w, Artists)
 	if errr != nil {
 		http.Error(w, "Err in Execute", http.StatusInternalServerError)
 		return

@@ -10,7 +10,26 @@
     <div class="tit"> 
           <h1>List of Artists</h1>
     </div>
-   
+
+    <div class="search-container">
+        <form action="/search" method="GET">
+            <input type="text" name="SeArch"  placeholder="Search" list="option">
+            
+            <datalist id="option">
+                {{range .}}
+            <option value="{{.Name}}">{{.Name}}</option>
+            <option value="{{.CreationDate}}">{{.CreationDate}}</option>
+            <option value="{{.FirstAlbum}}">{{.FirstAlbum}}</option>
+               {{range .Members}} 
+            <option value="{{.}}"></option>{{.}} </option>
+                {{end}}
+                {{end}}
+           </datalist>
+           
+        
+        </form>
+    </div>
+
     <div class="artists-container">
         {{range .}}
         <div class="artist-card">
@@ -20,7 +39,7 @@
             </a>
             <h2 class="NameOfArtist" name="artistName" value="{{.Name}}">{{.Name}}🎶</h2>
 
-            <h2 class="CreationDateoftheartist"><strong>Creation Date:</strong> {{.CreationDate}}</h2>
+            <h2 class="CreationDateoftheartist"><strong>Creation Date:</strong>{{.CreationDate}}</h2>
            
        </div>
        {{end}}
