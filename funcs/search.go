@@ -34,17 +34,17 @@ func Search(w http.ResponseWriter, r *http.Request) {
 		} `json:"index"`
 	}
 
-	// fetch relation
+	
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/relation")
 	if err != nil {
-		// err
+	
 		return
 	}
 	defer resp.Body.Close()
 
 	err = json.NewDecoder(resp.Body).Decode(&relationsData)
 	if err != nil {
-		// errr
+
 		return
 	}
 

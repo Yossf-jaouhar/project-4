@@ -7,6 +7,7 @@ import (
 )
 
 func PageArtist(w http.ResponseWriter, r *http.Request) {
+	
 	id := r.PathValue("id")
 
 	IDD, _ := strconv.Atoi(id)

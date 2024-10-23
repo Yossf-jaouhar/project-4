@@ -11,9 +11,9 @@ type ArtistData struct {
 	LocationsDATA    LocationsS
 	ConcertDates     string `json:"concertDates"`
 	ConcertDatesDATA ConcertDatesS
-	Relations        string              `json:"relations"`
-	RelationData   RelationsS
-	FEATCHINGerror error
+	Relations        string `json:"relations"`
+	RelationData     RelationsS
+	FEATCHINGerror   error
 }
 
 var Artists []ArtistData
