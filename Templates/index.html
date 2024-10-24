@@ -1,48 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artists</title>
-    <link rel="stylesheet" href="/assets/styles.css"> 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Artists</title>
+	<link rel="stylesheet" href="/assets/styles.css">
 </head>
+
 <body>
-    <div class="tit"> 
-          <h1>List of Artists</h1>
-    </div>
+	<div class="tit">
+		<h1>Groupie Tracker</h1>
+	</div>
 
-    <div class="search-container">
-        <form action="/search" method="GET">
-            <input type="text" name="SeArch"  placeholder="Search" list="option">
-            
-            <datalist id="option">
-                {{range .}}
-            <option value="{{.Name}}">{{.Name}}</option>
-            <option value="{{.CreationDate}}">{{.CreationDate}}</option>
-            <option value="{{.FirstAlbum}}">{{.FirstAlbum}}</option>
-               {{range .Members}} 
-            <option value="{{.}}"></option>{{.}} </option>
-                {{end}}
-                {{end}}
-           </datalist>
-           
-        
-        </form>
-    </div>
+	<div class="search-container">
+		<form action="/search" method="GET">
+			<input type="text" name="SeArch" placeholder="Search" list="option">
 
-    <div class="artists-container">
-        {{range .}}
-        <div class="artist-card">
-          
-            <a href="/Artist/{{.ID}}"> 
-                <img src="{{.Image}}" alt="{{.Name}} Image">
-            </a>
-            <h2 class="NameOfArtist" name="artistName" value="{{.Name}}">{{.Name}}🎶</h2>
+			<datalist id="option">
+				{{range .Artists}}
+				<option value="{{.Name}}">{{.Name}} --artist/band </option>
+				<option value="{{.CreationDate}}">{{.CreationDate}} --Creation Date</option>
+				<option value="{{.FirstAlbum}}">{{.FirstAlbum}} -- First Album</option>
+					{{range .Members }}
+					<option value="{{.}}"> --members </option>{{.}}</option>
+					{{end}}
+				{{end}}
+				
+				{{range .Locat.Index}}
+					{{ range .Locations }}
+						<option value="{{.}}"> --Locations</option>{{.}} --Locations</option>
+					{{ end }}
+				{{ end }}
+			
+			</datalist>
+		
 
-            <h2 class="CreationDateoftheartist"><strong>Creation Date:</strong>{{.CreationDate}}</h2>
-           
-       </div>
-       {{end}}
-    </div> 
+		</form>
+	</div>
+
+	<div class="artists-container">
+		{{if .SearchArt}}
+		{{range .SearchArt}}
+		<div class="artist-card">
+
+			<a href="/Artist/{{.ID}}">
+				<img src="{{.Image}}" alt="{{.Name}} Image">
+			</a>
+			<h2 class="NameOfArtist" name="artistName" value="{{.Name}}">{{.Name}}🎶</h2>
+
+			<h2 class="CreationDateoftheartist"><strong>Creation Date:</strong>{{.CreationDate}}</h2>
+
+		</div>
+
+
+
+		{{end}}
+		  {{else}}
+		        <div class="artnf">
+		        	<p> Artist Not Found</p>
+		        </div>
+		  {{end}}
+	</div>
+	<div class="botona">
+		<a class="ok" href="../">GO BACK</a>
+	</div>
 </body>
+
 </html>

@@ -10,14 +10,14 @@ import (
 func fetchArtists() {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
-		Artists = append(Artists, ArtistData{FEATCHINGerror: err})
+		Artis.Artists = append(Artis.Artists, ArtistData{FEATCHINGerror: err})
 		return
 	}
 	defer resp.Body.Close()
 
-	err = json.NewDecoder(resp.Body).Decode(&Artists)
+	err = json.NewDecoder(resp.Body).Decode(&Artis.Artists)
 	if err != nil {
-		Artists = append(Artists, ArtistData{FEATCHINGerror: err})
+		Artis.Artists = append(Artis.Artists, ArtistData{FEATCHINGerror: err})
 		return
 	}
 }
@@ -77,3 +77,16 @@ func (a *ArtistData) FeatchAll() {
 
 
 
+func SearchForAllLocations(){
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations")
+	if err != nil {
+		return
+	}
+	defer resp.Body.Close()
+	
+	
+	err = json.NewDecoder(resp.Body).Decode(&Artis.Locat)
+	if err != nil {
+		return
+	}
+}

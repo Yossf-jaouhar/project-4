@@ -5,31 +5,35 @@ import (
 	"net/http"
 )
 
-
-
+// Home handles requests for the home page.
 func Home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		http.Error(w, "404 page not found", http.StatusNotFound)
+		ErrorHandler(w, 404)
+		// http.Redirect(w, r, "/404", http.StatusFound)
 		return
 	}
 
 	if r.Method != http.MethodGet {
-		w.WriteHeader(http.StatusMethodNotAllowed)
+		ErrorHandler(w, http.StatusMethodNotAllowed)
 		return
 	}
 
 	fetchArtists()
-	
+	SearchForAllLocations()
+
+	Artis.SearchArt = Artis.Artists
+
 	tmpl, err := template.ParseFiles("Templates/index.html")
 	if err != nil {
-		http.Error(w, "Template not found", http.StatusInternalServerError)
+		ErrorHandler(w, http.StatusInternalServerError)
 		return
 	}
 
-	errr := tmpl.Execute(w, Artists)
+	
+
+	errr := tmpl.Execute(w, Artis)
 	if errr != nil {
-		http.Error(w, "Err in Execute", http.StatusInternalServerError)
+		ErrorHandler(w, http.StatusInternalServerError)
 		return
 	}
-	
 }

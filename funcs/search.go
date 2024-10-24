@@ -1,70 +1,43 @@
 package funcs
 
 import (
-	"encoding/json"
 	"html/template"
 	"net/http"
 	"strconv"
 	"strings"
 )
 
+// Search handles search requests for artists.
 func Search(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		http.Error(w, "method not", http.StatusMethodNotAllowed)
+		ErrorHandler(w, http.StatusMethodNotAllowed)
 		return
 	}
 
 	err := r.ParseForm()
 	if err != nil {
-		http.Error(w, "bad request", http.StatusBadRequest)
+		ErrorHandler(w, http.StatusBadRequest)
 		return
 	}
 
 	Searchh := r.FormValue("SeArch")
-
+	Searchh = strings.ToLower(Searchh)
 	var ArtTest []ArtistData
 
-
-
-
-	var relationsData struct {
-		Index []struct {
-			ID             int                 `json:"id"`
-			DatesLocations map[string][]string `json:"datesLocations"`
-		} `json:"index"`
-	}
-
-	
-	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/relation")
-	if err != nil {
-	
-		return
-	}
-	defer resp.Body.Close()
-
-	err = json.NewDecoder(resp.Body).Decode(&relationsData)
-	if err != nil {
-
-		return
-	}
-
-
-	for index, artist := range Artists {
+	for index, artist := range Artis.Artists {
 		found := false
 
 		if strings.Contains(strings.ToLower(artist.Name), strings.ToLower(Searchh)) ||
 			strings.Contains(strconv.Itoa(artist.CreationDate), Searchh) ||
-			strings.Contains(artist.FirstAlbum, Searchh) {
-				
-			ArtTest = append(ArtTest, Artists[index])
+			artist.FirstAlbum == Searchh {
+
+			ArtTest = append(ArtTest, Artis.Artists[index])
 			continue
 		}
-
-		locations := relationsData.Index[index].DatesLocations
-
-		for location := range locations {
+		locations := Artis.Locat.Index[index].Locations
+		for _, location := range locations {
 			if strings.Contains(location, Searchh) {
-				ArtTest = append(ArtTest, Artists[index])
+				ArtTest = append(ArtTest, Artis.Artists[index])
 				found = true
 				break
 			}
@@ -76,7 +49,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 
 		for _, member := range artist.Members {
 			if strings.Contains(strings.ToLower(member), strings.ToLower(Searchh)) {
-				ArtTest = append(ArtTest, Artists[index])
+				ArtTest = append(ArtTest, Artis.Artists[index])
 				break
 			}
 		}
@@ -84,13 +57,13 @@ func Search(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, err := template.ParseFiles("Templates/index.html")
 	if err != nil {
-		http.Error(w, "Template not found", http.StatusInternalServerError)
+		ErrorHandler(w, http.StatusInternalServerError)
 		return
 	}
-
-	errr := tmpl.Execute(w, ArtTest)
+	Artis.SearchArt = ArtTest
+	errr := tmpl.Execute(w, Artis)
 	if errr != nil {
-		http.Error(w, "Err in Execute", http.StatusInternalServerError)
+		ErrorHandler(w, http.StatusInternalServerError)
 		return
 	}
 }
