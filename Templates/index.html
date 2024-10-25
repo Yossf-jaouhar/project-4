@@ -19,17 +19,17 @@
 
 			<datalist id="option">
 				{{range .Artists}}
-				<option value="{{.Name}}">{{.Name}} --artist/band </option>
-				<option value="{{.CreationDate}}">{{.CreationDate}} --Creation Date</option>
-				<option value="{{.FirstAlbum}}">{{.FirstAlbum}} -- First Album</option>
+				<option value="{{.Name}}">{{.Name}} - artist/band name </option>
+				<option value="{{.CreationDate}}">{{.CreationDate}} - creation date</option>
+				<option value="{{.FirstAlbum}}">{{.FirstAlbum}} - first album date </option>
 					{{range .Members }}
-					<option value="{{.}}"> --members </option>{{.}}</option>
+					<option value="{{.}}">{{.}} - members</option>
 					{{end}}
 				{{end}}
 				
-				{{range .Locat.Index}}
+				{{range .UniqueLocations.Index}}
 					{{ range .Locations }}
-						<option value="{{.}}"> --Locations</option>{{.}} --Locations</option>
+						<option value="{{.}}">{{.}} - locations</option>
 					{{ end }}
 				{{ end }}
 			

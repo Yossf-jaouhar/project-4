@@ -22,6 +22,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	SearchForAllLocations()
 
 	Artis.SearchArt = Artis.Artists
+	Artis.UniqueLocations = Artis.AllLocation
+
+	Artis.UniqueLocations = Unique(Artis.UniqueLocations)
 
 	tmpl, err := template.ParseFiles("Templates/index.html")
 	if err != nil {
@@ -29,11 +32,10 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	
-
 	errr := tmpl.Execute(w, Artis)
 	if errr != nil {
 		ErrorHandler(w, http.StatusInternalServerError)
 		return
 	}
 }
+

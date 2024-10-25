@@ -85,7 +85,7 @@ func SearchForAllLocations(){
 	defer resp.Body.Close()
 	
 	
-	err = json.NewDecoder(resp.Body).Decode(&Artis.Locat)
+	err = json.NewDecoder(resp.Body).Decode(&Artis.AllLocation)
 	if err != nil {
 		return
 	}

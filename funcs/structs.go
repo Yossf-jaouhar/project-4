@@ -20,9 +20,11 @@ type ArtistData struct {
 // Artists holds a slice of ArtistData.
 var Artis struct {
 	Artists []ArtistData
-	Locat   LocationsDATA
-
 	SearchArt []ArtistData
+	
+	AllLocation   LocationsDATA
+	UniqueLocations  LocationsDATA
+	
 }
 
 // LocationsS hoArtistslds location data related to artists.

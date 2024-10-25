@@ -34,7 +34,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 			ArtTest = append(ArtTest, Artis.Artists[index])
 			continue
 		}
-		locations := Artis.Locat.Index[index].Locations
+		locations := Artis.AllLocation.Index[index].Locations
 		for _, location := range locations {
 			if strings.Contains(location, Searchh) {
 				ArtTest = append(ArtTest, Artis.Artists[index])
